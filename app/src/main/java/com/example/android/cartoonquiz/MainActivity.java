@@ -88,13 +88,14 @@ public class MainActivity extends AppCompatActivity {
         //Declarations to all the required variables to change the app's appearance.
         switch (questionIndex) {
             case 1: {
-                checkAnswer();
+
                 questionText.setText("What's the title of Cinderella's song in the movie " +
                         "with the same name?");
                 option1.setText("A dream is wish your hearts makes;");
                 option2.setText("I have a dream;");
                 option3.setText("It's my dream you take;");
                 option4.setText("I'm just a dreamer");
+                checkAnswer();
 
                 break;
             }
@@ -139,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
             }
             //Case 6 compute the points.
             case 6: {
-                checkAnswer();
                 questionText.setText("Your result is: " + boxResult
                         + " points. out of 6.0 points");
                 radioGroup.removeAllViews();
@@ -200,46 +200,44 @@ public class MainActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.answerGroup);
         switch (questionIndex) {
             case 1: {
-                if (radioGroup.indexOfChild(findViewById
-                        (radioGroup.getCheckedRadioButtonId())) == 2) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.option2) {
                     boxResult += 1;
+                } else {
+                    boxResult = 0;
+                    break;
                 }
-                radioGroup.check(-1);
-
-                break;
             }
             case 2: {
-                if (radioGroup.indexOfChild(findViewById
-                        (radioGroup.getCheckedRadioButtonId())) == 1) {
-                    boxResult = 1;
+                if (radioGroup.getCheckedRadioButtonId() == R.id.option1) {
+                    boxResult += 1;
+                } else {
+                    boxResult = 0;
+                    break;
                 }
-                radioGroup.check(-1);
-
-                break;
             }
             case 3: {
-                if (radioGroup.indexOfChild
-                        (findViewById(radioGroup.getCheckedRadioButtonId())) == 3) {
-                    boxResult = 1;
+                if (radioGroup.getCheckedRadioButtonId() == R.id.option3) {
+                    boxResult += 1;
+                } else {
+                    boxResult = 0;
+                    break;
                 }
-                radioGroup.check(-1);
-
-                break;
             }
             case 4: {
-                if (radioGroup.indexOfChild
-                        (findViewById(radioGroup.getCheckedRadioButtonId())) == 3) {
-                    boxResult = 1;
+                if (radioGroup.getCheckedRadioButtonId() == R.id.option3) {
+                    boxResult += 1;
+                } else {
+                    boxResult = 0;
+                    break;
                 }
-                radioGroup.check(-1);
-
-                break;
             }
             case 5: {
                 editText = findViewById(R.id.answerEditText);
                 if (editText.getText().toString().equals("Hakuna Matata") ||
                         editText.getText().toString().equals("hakuna matata")) {
                     boxResult = 1;
+                } else {
+                    boxResult = 0;
                 }
             }
             case 6: {
