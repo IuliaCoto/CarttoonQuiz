@@ -9,4 +9,7 @@
     <string name="question_3_c">Jafar;</string>
     <string name="question_4_d">Iago</string>
     <string name="submit_button">Submit</string>
+    <string name="name1_text">Maleficient</string>
+    <string name="name2_text">Merryweather</string>
+    <string name="name3_text">Flora</string>
 </resources>

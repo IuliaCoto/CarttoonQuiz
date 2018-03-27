@@ -57,19 +57,50 @@ public class MainActivity extends AppCompatActivity {
                     switch (buttonView.getId()) {
                         case R.id.checkBoxName1: {
                             name1 = isChecked;
+                            checkAnswer();
                             break;
                         }
                         case R.id.checkBoxName2: {
                             name2 = isChecked;
+                            checkAnswer();
                             break;
                         }
                         case R.id.checkBoxName3: {
                             name3 = isChecked;
+                            checkAnswer();
                             break;
                         }
                     }
                 }
             };
+
+    private void addCheckBoxGroup() {
+        RadioGroup radioGroupLayout = findViewById(R.id.answerGroup);
+
+        CheckBox checkBox = new CheckBox(MainActivity.this);
+        checkBox.setOnCheckedChangeListener(onCheckedChangeListener);
+        checkBox.setText(R.string.name1_text);
+        checkBox.setTextColor(Color.WHITE);
+        checkBox.setId(R.id.checkBoxName1);
+        checkBox.setChecked(false);
+        radioGroupLayout.addView(checkBox);
+
+        checkBox = new CheckBox(MainActivity.this);
+        checkBox.setOnCheckedChangeListener(onCheckedChangeListener);
+        checkBox.setText(R.string.name2_text);
+        checkBox.setTextColor(Color.WHITE);
+        checkBox.setId(R.id.checkBoxName2);
+        checkBox.setChecked(false);
+        radioGroupLayout.addView(checkBox);
+
+        checkBox = new CheckBox(MainActivity.this);
+        checkBox.setOnCheckedChangeListener(onCheckedChangeListener);
+        checkBox.setText(R.string.name3_text);
+        checkBox.setId(R.id.checkBoxName3);
+        checkBox.setTextColor(Color.WHITE);
+        checkBox.setChecked(false);
+        radioGroupLayout.addView(checkBox);
+    }
 
     public void setupView() {
         questionText = findViewById(R.id.questionText);
@@ -141,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             //Case 6 compute the points.
             case 6: {
                 questionText.setText("Your result is: " + boxResult
-                        + " points. out of 6.0 points");
+                        + " points. out of 6 points");
                 radioGroup.removeAllViews();
 
                 break;
@@ -158,32 +189,6 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
-    private void addCheckBoxGroup() {
-        RadioGroup radioGroupLayout = findViewById(R.id.answerGroup);
-
-        CheckBox checkBox = new CheckBox(MainActivity.this);
-        checkBox.setOnCheckedChangeListener(onCheckedChangeListener);
-        checkBox.setText("Maleficient");
-        checkBox.setTextColor(Color.WHITE);
-        checkBox.setId(R.id.checkBoxName1);
-        checkBox.setChecked(false);
-        radioGroupLayout.addView(checkBox);
-
-        checkBox = new CheckBox(MainActivity.this);
-        checkBox.setOnCheckedChangeListener(onCheckedChangeListener);
-        checkBox.setText("Merryweather");
-        checkBox.setTextColor(Color.WHITE);
-        checkBox.setId(R.id.checkBoxName2);
-        radioGroupLayout.addView(checkBox);
-
-        checkBox = new CheckBox(MainActivity.this);
-        checkBox.setOnCheckedChangeListener(onCheckedChangeListener);
-        checkBox.setText("Flora");
-        checkBox.setId(R.id.checkBoxName3);
-        checkBox.setTextColor(Color.WHITE);
-        checkBox.setChecked(false);
-        radioGroupLayout.addView(checkBox);
-    }
 
     private void addEditText() {
         RadioGroup radioGroupLayout = findViewById(R.id.answerGroup);
@@ -202,56 +207,47 @@ public class MainActivity extends AppCompatActivity {
             case 1: {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.option2) {
                     boxResult += 1;
-                } else {
-                    boxResult = 0;
-                    break;
                 }
+                radioGroup.check(-1);
+                break;
             }
             case 2: {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.option1) {
                     boxResult += 1;
-                } else {
-                    boxResult = 0;
-                    break;
                 }
+                radioGroup.check(-1);
+                break;
             }
             case 3: {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.option3) {
                     boxResult += 1;
-                } else {
-                    boxResult = 0;
-                    break;
+
                 }
+                radioGroup.check(-1);
+                break;
             }
             case 4: {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.option3) {
                     boxResult += 1;
-                } else {
-                    boxResult = 0;
-                    break;
                 }
+                radioGroup.check(-1);
+                break;
             }
             case 5: {
                 editText = findViewById(R.id.answerEditText);
                 if (editText.getText().toString().equals("Hakuna Matata") ||
                         editText.getText().toString().equals("hakuna matata")) {
-                    boxResult = 1;
-                } else {
-                    boxResult = 0;
+                    boxResult += 1;
                 }
             }
             case 6: {
                 if (name1 && name2) {
-                    boxResult = 1;
-                } else {
-                    boxResult = 0;
+                    boxResult += 1;
                 }
-                break;
             }
             default:
                 break;
         }
-
     }
 
     @Override
