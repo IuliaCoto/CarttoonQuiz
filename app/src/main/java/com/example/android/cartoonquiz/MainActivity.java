@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     boolean name1 = false;
     boolean name2 = false;
     boolean name3 = false;
+    boolean name4 = false;
+    // Declaring and initializing KEY_INDEX to serve as NVP (Name-Value Pair).
     private static final String KEY_INDEX = "index";
     private static final String KEY_INDEX_2 = "index2";
 
@@ -46,8 +49,16 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             questionIndex = savedInstanceState.getInt(KEY_INDEX_2, questionIndex);
         }
+        Button mButton = findViewById(R.id.submitButton);
+
+        if (questionIndex < 6) {
+            questionIndex--;
+        }
+        submitButton(mButton);
+        checkAnswer();
     }
 
+    // Adding a state to the checkbox questions, if the var. is checked. turn to true, otherwise turn to false
     private CheckBox.OnCheckedChangeListener onCheckedChangeListener =
             new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -68,10 +79,16 @@ public class MainActivity extends AppCompatActivity {
                             checkAnswer();
                             break;
                         }
+                        case R.id.checkBoxName4: {
+                            name4 = isChecked;
+                            checkAnswer();
+                            break;
+                        }
                     }
                 }
             };
 
+    // Adding a checkBox questions
     private void addCheckBoxGroup() {
         RadioGroup radioGroupLayout = findViewById(R.id.answerGroup);
 
@@ -98,8 +115,17 @@ public class MainActivity extends AppCompatActivity {
         checkBox.setTextColor(Color.WHITE);
         checkBox.setChecked(false);
         radioGroupLayout.addView(checkBox);
+
+        checkBox = new CheckBox(MainActivity.this);
+        checkBox.setOnCheckedChangeListener(onCheckedChangeListener);
+        checkBox.setText(R.string.name4_text);
+        checkBox.setId(R.id.checkBoxName4);
+        checkBox.setTextColor(Color.WHITE);
+        checkBox.setChecked(false);
+        radioGroupLayout.addView(checkBox);
     }
 
+    // Linking variables with the questions from the radioGroup View
     public void setupView() {
         questionText = findViewById(R.id.questionText);
         questionNumberText = findViewById(R.id.question_number);
@@ -111,13 +137,15 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
+
+    // When the user will press the button it will store the value and increment the question number
     public void submitButton(View view) {
+
         //Checks if we got to the end of the quiz, if that's true it exits the function.
         if (questionIndex == 7) return;
         //Declarations to all the required variables to change the app's appearance.
         switch (questionIndex) {
             case 1: {
-
                 questionText.setText("What's the title of Cinderella's song in the movie " +
                         "with the same name?");
                 option1.setText("A dream is wish your hearts makes;");
@@ -125,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
                 option3.setText("It's my dream you take;");
                 option4.setText("I'm just a dreamer");
                 checkAnswer();
-
                 break;
             }
             case 2: {
@@ -135,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                 option2.setText("Donna Murpy;");
                 option3.setText("Mandy Moor;");
                 option4.setText("Miley Cyrus");
-
                 break;
             }
             case 3: {
@@ -145,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
                 option2.setText("Hanna;");
                 option3.setText("Heihei;");
                 option4.setText("Hammurabi");
-
                 break;
             }
             //EditText question.
@@ -154,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
                 questionText.setText("What's the name of Timon's song from \"The Lion King\"");
                 radioGroup.removeAllViews();
                 addEditText();
-
                 break;
             }
             //Editable text field.
@@ -164,15 +188,13 @@ public class MainActivity extends AppCompatActivity {
                         "of Aurora's good fairies are:");
                 radioGroup.removeAllViews();
                 addCheckBoxGroup();
-
                 break;
             }
             //Case 6 compute the points.
             case 6: {
                 questionText.setText("Your result is: " + boxResult
-                        + " points. out of 6 points");
+                        + " points - out of 6 points");
                 radioGroup.removeAllViews();
-
                 break;
             }
             default:
@@ -180,18 +202,20 @@ public class MainActivity extends AppCompatActivity {
         }
         //Recording the answer and move on to the next question.
         questionIndex++;
-
         if (questionIndex < 7) questionNumberText.setText("Question " + questionIndex + ":");
-        else questionNumberText.setText("Congratulations! You completed the Quiz!");
+        else
+            questionNumberText.setText("\"Even miracles take a little time!\"");
     }
 
+    // Denotes that the annotated element should only be called on the given API level or higher.
     @RequiresApi(api = Build.VERSION_CODES.M)
+    // Indicates that Lint should ignore the specified warnings for the annotated element.
     @SuppressLint("SetTextI18n")
 
+    // This method create a nea editText View
     private void addEditText() {
         RadioGroup radioGroupLayout = findViewById(R.id.answerGroup);
         editText = new EditText(MainActivity.this);
-
         editText.setHint("Matata");
         editText.setTextColor(WHITE);
         editText.setWidth(radioGroupLayout.getWidth());
@@ -199,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         radioGroupLayout.addView(editText);
     }
 
+    // This method checking all the answers, if it is true => will add one to the boxResult => otherwise 0
     public void checkAnswer() {
         radioGroup = findViewById(R.id.answerGroup);
         switch (questionIndex) {
@@ -239,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             case 6: {
-                if (name1 && name2) {
+                if (name2 && name3 && name4) {
                     boxResult += 1;
                 }
             }
@@ -251,6 +276,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+         /*
+        *Save UI state changes to the savedInstanceState.
+        * This bundle will be passed to onCreate if the process is
+        * killed and restarted.
+        * Storing a NVP ("Name-Value Pair") map, and it will get
+        * passed in to onCreate () method.
+        */
         savedInstanceState.putInt(KEY_INDEX, boxResult);
         savedInstanceState.putInt(KEY_INDEX_2, questionIndex);
     }
