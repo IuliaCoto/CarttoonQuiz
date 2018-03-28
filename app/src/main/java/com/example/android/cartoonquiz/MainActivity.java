@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     boolean name1 = false;
     boolean name2 = false;
     boolean name3 = false;
-    double correctQuestions;
     private static final String KEY_INDEX = "index";
     private static final String KEY_INDEX_2 = "index2";
 
@@ -42,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setupView();
         if (savedInstanceState != null) {
-            correctQuestions = savedInstanceState.getDouble
-                    (KEY_INDEX, boxResult);
+            boxResult = savedInstanceState.getInt(KEY_INDEX, boxResult);
         }
         if (savedInstanceState != null) {
             questionIndex = savedInstanceState.getInt(KEY_INDEX_2, questionIndex);
@@ -253,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putDouble(KEY_INDEX, boxResult);
+        savedInstanceState.putInt(KEY_INDEX, boxResult);
         savedInstanceState.putInt(KEY_INDEX_2, questionIndex);
     }
 }

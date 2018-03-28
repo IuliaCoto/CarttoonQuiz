@@ -1,60 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/relativeLayout"
+    android:layout_height="wrap_content"
     android:background="#001433"
     tools:context="com.example.android.cartoonquiz.MainActivity">
 
-        <ImageView
-            android:id="@+id/walt_disney"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="12dp"
-            android:contentDescription="@string/app_logo"
-            android:src="@drawable/walt_disney_house">
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-        </ImageView>
+            <ImageView
+                android:id="@+id/walt_disney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:contentDescription="@string/app_logo"
+                android:src="@drawable/walt_disney_house">
 
-        <TextView
-            android:id="@+id/question_number"
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/walt_disney"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="5dp"
-            android:text="@string/question_1"
-            android:textColor="#b7d7e8" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/questionText"
+            <TextView
+                android:id="@+id/question_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="5dp"
+                android:text="@string/question_1"
+                android:textColor="#b7d7e8" />
+
+            <TextView
+                android:id="@+id/questionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:text="@string/question_text_1"
+                android:textAlignment="center"
+                android:textColor="#b7d7e8" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/question_number"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="16dp"
-            android:text="@string/question_text_1"
-            android:textAlignment="center"
-            android:textColor="#b7d7e8" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="200dp"
-            android:layout_height="2dp"
-            android:layout_below="@id/questionText"
-            android:layout_centerHorizontal="true"
-            android:background="#FFFFFF" />
+            <View
+                android:id="@+id/view1"
+                android:layout_width="200dp"
+                android:layout_height="2dp"
+                android:background="#FFFFFF" />
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/answerGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp">
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp">
 
             <RadioButton
                 android:id="@+id/option1"
@@ -106,18 +127,27 @@
                 tools:ignore="UnusedAttribute" />
         </RadioGroup>
 
-        <Button
-            android:id="@+id/submitButton"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="500dp"
-            android:background="#00000000"
-            android:onClick="submitButton"
-            android:text="@string/submit_button"
-            android:textColor="#b7d7e8" />
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="120dp"
+                android:background="@color/colorAccent"
+                android:onClick="submitButton"
+                android:text="@string/submit_button"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
 
 
 
