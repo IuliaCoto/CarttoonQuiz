@@ -265,15 +265,12 @@ public class MainActivity extends AppCompatActivity {
             }
             case 5: {
                 editText = findViewById(R.id.answerEditText);
-                if (editText.getText().toString().equals("Hakuna Matata") ||
-                        editText.getText().toString().equals("hakuna matata")) {
+                if (editText.getText().toString().trim().equalsIgnoreCase("hakuna matata")) {
                     boxResult += 1;
                 }
             }
             case 6: {
-                if (name1 && name2 && name3 && name4) {
-                    boxResult += 0;
-                } else if (name2 && name3 && name4) {
+                if (!name1 && name2 && name3 && name4) {
                     boxResult += 1;
                 }
             }
