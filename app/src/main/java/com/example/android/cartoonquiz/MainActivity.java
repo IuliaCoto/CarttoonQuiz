@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.graphics.Color.WHITE;
 
@@ -190,10 +192,15 @@ public class MainActivity extends AppCompatActivity {
                 addCheckBoxGroup();
                 break;
             }
-            //Case 6 compute the points.
+            //Case 6 => we have formed
             case 6: {
-                questionText.setText("Your result is: " + boxResult
-                        + " points - out of 6 points");
+                questionText.setText("");
+                Toast toast = Toast.makeText(this, "Congratulations! Your score is: "
+                                + boxResult + " point(s) out of 6p.",
+                        Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER |
+                        Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
                 radioGroup.removeAllViews();
                 break;
             }
@@ -264,7 +271,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             case 6: {
-                if (name2 && name3 && name4) {
+                if (name1 && name2 && name3 && name4) {
+                    boxResult += 0;
+                } else if (name2 && name3 && name4) {
                     boxResult += 1;
                 }
             }
